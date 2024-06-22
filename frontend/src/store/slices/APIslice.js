@@ -22,15 +22,15 @@ const APIslice = createSlice({
   extraReducers: builder => {
     builder.addCase(getData.pending, (state) => {
       state.getData.loadingStatus = "loading";
-      console.log('start')
+      // console.log('start')
     });
     builder.addCase(getData.fulfilled, (state, action) => {
       state.getData.loadingStatus = "idle";
-      console.log(`res:`)
+      // console.log(`res:`)
     });
     builder.addCase(getData.rejected, (state, action) => {
       state.getData.loadingStatus = "failed";
-      console.log(`rej:`)
+      // console.log(`rej:`)
     });
 
 

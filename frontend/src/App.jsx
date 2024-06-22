@@ -7,8 +7,8 @@ import Login from "./components/Login";
 import Chat from "./components/Chat";
 import withAuthorize from "./HOCs/withAuthorize";
 
-import { addMessage } from "./store/slices/messagesSlice"
-import { addChannele, removeChannel, renameChanel } from "./store/slices/channelsSlice";
+import { messagesActions } from "./store/slices/messagesSlice"
+import { channelsActions } from "./store/slices/channelsSlice";
 
 const WithAuthorizeComponent = withAuthorize({
   Authorized: Chat,
@@ -26,22 +26,22 @@ function App() {
     function onNewMessage(payload) {
       // const data = JSON.parse(payload) // => { body: "new message", channelId: 7, id: 8, username: "admin" }
       console.log(payload)
-      dispatch(addMessage(payload))
+      dispatch(messagesActions.addMessage({...payload, channelId: Number(payload.channelId)}))
     }
 
     function onNewChannel(payload) {
       console.log(payload) // { id: 6, name: "new channel", removable: true }
-      dispatch(addChannele(payload));
+      dispatch(channelsActions.addChannele(payload));
     }
 
     function onRemoveChannel(payload) {
       console.log(payload) // // { id: 6 }
-      dispatch(removeChannel(payload))
+      dispatch(channelsActions.removeChannel(payload))
     }
 
     function onRenameChannel(payload) {
       console.log(payload) // { id: 7, name: "new name channel", removable: true }
-      dispatch(renameChanel(payload))
+      dispatch(channelsActions.renameChanel(payload))
     }
     
     socket.on('connect', onConnect)
